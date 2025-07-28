@@ -2,6 +2,8 @@
 // Created by dev on 27/07/25.
 //
 
+#include <cstdlib>
+
 class Node {
     int data;
     Node *next;
@@ -14,6 +16,9 @@ public:
         this->next = next;
         this->prev = prev;
     }
+
+    // TODO: some of these may become redundant as LinkedList will also need to implement some
+    // Move the members to the public?
 
     int val() const {
         return this->data;
@@ -73,6 +78,7 @@ public:
     int valueAt(int index) const {
         Node *current = this->head;
         int i = 0;
+        // could use a for loop with current as the ptr...
         while (current != nullptr) {
             if (i == index) {
                 return current->val();
@@ -87,4 +93,8 @@ public:
 
 int main() {
     LinkedList list = LinkedList(1);
+
+
+    free(list);
+    return 0;
 }
