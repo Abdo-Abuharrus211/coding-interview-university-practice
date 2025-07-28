@@ -4,4 +4,6 @@ project(ciu)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(ciu
-        Arrays/vector.cpp)
+        Arrays/vector.cpp
+        LinkedLists/LinkedList.cpp
+)
