@@ -107,29 +107,30 @@ public:
         this->size++;
     }
 
-    // TODO: fix this
     bool insert(int value, int index) {
-        if (index < 0) {
+        if (index < 0 || this->size < index) {
             return false;
         }
         if (this->size == 0) {
             pushFront(value);
         }
+
+        // walk to before the index node
         Node *current = this->head;
-        int i = 0;
-        while (current != nullptr) {
-            if (i == index) {
-                Node *newNode = new Node(value, nullptr, nullptr);
-                newNode->setNext(current->getNext());
-                current->setNext(newNode);
-                newNode->setPrev(current);
-                this->size++;
-                return true;
-            }
-            i++;
+        for (int i = 0; i < index - 1; ++i) {
             current = current->getNext();
         }
-        return false;
+        Node *newNode = new Node(value, nullptr, nullptr);
+        newNode->setNext(current->getNext());
+        newNode->setPrev(current);
+        current->setNext(newNode);
+
+        // if next node exists, set its prev to new node
+        if (newNode->getNext() != nullptr) {
+            newNode->getNext()->setPrev(newNode);
+        }
+        this->size++;
+        return true;
     }
 
     int popFront() {
